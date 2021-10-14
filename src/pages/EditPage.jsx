@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {getCategories, getTaskById, getTaskByIdForEdit} from "../API/TaskService";
 import {useParams} from "react-router-dom";
-import NotFound from "./NotFound";
+import NotFoundPage from "./NotFoundPage";
 import LoaderIndicator from "../components/UI/LoaderIndicator";
 import {Container, TextareaAutosize, TextField, Typography} from "@mui/material";
 import Button from "@mui/material/Button";
@@ -38,7 +38,7 @@ const EditPage = (props) => {
 
     if(!props.currentUser.id === task.author.id)
         return (
-            <NotFound/>
+            <NotFoundPage/>
         )
     return (
         <Container maxWidth="sm">

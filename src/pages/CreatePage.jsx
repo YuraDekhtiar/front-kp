@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Container, MenuItem, Paper, Select, TextareaAutosize, TextField, Typography} from "@mui/material";
+import {Container, InputBase, MenuItem, Paper, Select, TextareaAutosize, TextField, Typography} from "@mui/material";
 import './Create.css'
 import Button from "@mui/material/Button";
 import UploadForm from "../components/UI/UploadForm";
@@ -13,7 +13,7 @@ import MySelect from "../components/UI/MySelect";
 import {Redirect} from "react-router-dom";
 import { useAlert } from "react-alert";
 
-const Create = (effect, deps) => {
+const CreatePage = (effect, deps) => {
     const alert = useAlert();
     const [loading, setLoading] = useState(true);
     const [responseId, setResponseId] = useState(null);
@@ -90,6 +90,7 @@ const Create = (effect, deps) => {
                            variant="standard"
                            onInput={e => setTask({...task, title: e.target.value})}
                 />
+
                 <TextareaAutosize
                     id="bodyText"
                     aria-label="minimum height"
@@ -164,4 +165,4 @@ const Create = (effect, deps) => {
     )
 }
 
-export default Create
+export default CreatePage

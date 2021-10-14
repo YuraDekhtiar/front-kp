@@ -5,7 +5,7 @@ import {AuthContext} from "../context";
 import {getAll} from "../API/TaskService";
 import LoaderIndicator from "../components/UI/LoaderIndicator";
 
-const Tasks = () => {
+const TasksPage = () => {
     const [loading, setLoading] = useState(true);
     const [tasks, setTasks] = useState([]);
 
@@ -32,4 +32,4 @@ const Tasks = () => {
   )
 }
 
-export default Tasks
+export default TasksPage

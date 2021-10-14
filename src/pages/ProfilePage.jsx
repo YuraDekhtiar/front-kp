@@ -10,7 +10,7 @@ import {getAllByUserId} from "../API/TaskService";
 import TasksTable from "../components/UI/TasksTable";
 import {Link} from "react-router-dom";
 
-const Profile = (props) => {
+const ProfilePage = (props) => {
     const [user, setUser] = useState([]);
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true)
@@ -93,4 +93,4 @@ const Profile = (props) => {
     )
 }
 
-export default Profile;
+export default ProfilePage;

@@ -39,6 +39,16 @@ export async function getUserAnswered(id) {
     return await axios.get(API_BASE_URL + "/tasks/" + id + "/answered", getConfig());
 }
 
+export async function searchTask(query) {
+    return await axios.get(API_BASE_URL + "/tasks", {
+        headers: {'Authorization': 'Bearer ' + getAccessToken()},
+        params: {
+            search: query,
+        }
+    });
+}
+
+
 export async function getAll(limit = 10, page = 0, sort="created") {
     return await axios.get(API_BASE_URL + "/tasks", {
         headers: {'Authorization': 'Bearer ' + getAccessToken()},

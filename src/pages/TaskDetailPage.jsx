@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {getAnswerResult, getTaskById, getUserAnswered, postSetRating} from "../API/TaskService";
-import {useParams} from "react-router-dom";
+import {Redirect, useParams} from "react-router-dom";
 import {
     Alert,
     Button,
@@ -14,11 +14,13 @@ import LoaderIndicator from "../components/UI/LoaderIndicator";
 import ReactMarkdown from 'react-markdown'
 
 import {AuthContext} from "../context";
+import NotFoundPage from "./NotFoundPage";
 
-const TaskDetail = (props) => {
+const TaskDetailPage = (props) => {
 
     const params = useParams();
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [task, setTask] = useState([]);
     const [userAnswer, setUserAnswer] = useState();
     const [isVisibleAlert, setIsVisibleAlert] = useState(false);
@@ -30,7 +32,10 @@ const TaskDetail = (props) => {
         await getTaskById(params.id)
             .then(response => {
                 setTask(response.data);
-            });
+            }).catch(() => {
+                setLoading(false);
+                setError(true);
+            })
         getUserAnswered(params.id)
             .then(response => {
                 setUserAnswered(response.data);
@@ -64,6 +69,11 @@ const TaskDetail = (props) => {
 
     if(loading) {
         return <LoaderIndicator />
+    }
+    if(error) {
+        return (
+            <Redirect to={"/error"}/>
+        )
     }
     return (
         <>
@@ -152,4 +162,4 @@ const TaskDetail = (props) => {
     )
 }
 
-export default TaskDetail
+export default TaskDetailPage

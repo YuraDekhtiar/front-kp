@@ -1,18 +1,23 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {Grid} from "@mui/material";
+import {Grid, Typography} from "@mui/material";
 import TaskCard from "../components/UI/TaskCard";
 import LoaderIndicator from "../components/UI/LoaderIndicator";
 import {getAll, getTaskById} from "../API/TaskService";
 import {AuthContext} from "../context";
+import Button from '@mui/material/Button';
 
 
-const Main = () => {
+const MainPage = () => {
     const [loading, setLoading] = useState(true);
     const [tasks, setTasks] = useState([]);
 
     const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
 
     useEffect(async () => {
+        await getAll()
+            .then(response => {
+                setTasks(response.data);
+            });
         await getAll()
             .then(response => {
                 setTasks(response.data);
@@ -33,4 +38,4 @@ const Main = () => {
   )
 }
 
-export default Main
+export default MainPage

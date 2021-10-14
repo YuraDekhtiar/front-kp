@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {Button, Grid, Paper, Typography} from "@mui/material";
 
-class NotFound extends Component {
+class NotFoundPage extends Component {
     render() {
         return (
             <Paper sx={{ p: 5, margin: "auto", marginTop: 10, maxWidth: 500, flexGrow: 1}}>
@@ -20,4 +20,4 @@ class NotFound extends Component {
     }
 }
 
-export default NotFound;
+export default NotFoundPage;

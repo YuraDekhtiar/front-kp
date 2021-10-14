@@ -2,40 +2,45 @@ import React, {useEffect, useState} from 'react'
 import {Route, Switch} from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import NavBar from "./components/NavBar";
-import Profile from "./pages/Profile";
-import Main from "./pages/Main";
-import Create from "./pages/Create";
-import NotFound from "./pages/NotFound";
+import ProfilePage from "./pages/ProfilePage";
+import MainPage from "./pages/MainPage";
+import CreatePage from "./pages/CreatePage";
+import NotFoundPage from "./pages/NotFoundPage";
 import OAuth2RedirectHandler from "./oauth2/OAuth2RedirectHandler";
-import Login from "./pages/Login";
+import LoginPage from "./pages/LoginPage";
 import {ACCESS_TOKEN} from "./constants";
 import {Container} from "@mui/material";
 import BottomBar from "./components/UI/BottomBar";
 import {getCurrentUser} from "./API/UserServices";
-import TaskDetail from "./pages/TaskDetail";
+import TaskDetailPage from "./pages/TaskDetailPage";
 import {AuthContext} from "./context";
-import Tasks from "./pages/Tasks";
+import TasksPage from "./pages/TasksPage";
 import EditPage from "./pages/EditPage";
 import LoaderIndicator from "./components/UI/LoaderIndicator";
 import AlertTemplate from "react-alert-template-basic";
 import {positions, Provider} from "react-alert";
+import InputBase from "@mui/material/InputBase";
+import SearchPage from "./pages/SearchPage";
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
+
     const options = {
         timeout: 2000,
         position: positions.BOTTOM_CENTER
     };
 
-    useEffect( async () => {
+    useEffect( () => {
         getCurrentUser()
             .then(response => {
                 setCurrentUser(response.data);
                 setIsAuthenticated(true);
+                setLoading(false);
+            }).catch(() => {
+                setLoading(false);
             })
-        setLoading(false);
     },[]);
 
     const handleLogout = () => {
@@ -43,6 +48,10 @@ const App = () => {
         setIsAuthenticated(false);
         setCurrentUser(null);
     }
+    if(loading)
+        return (
+            <LoaderIndicator/>
+        );
 
     return (
         <Provider template={AlertTemplate} {...options}>
@@ -53,9 +62,10 @@ const App = () => {
               <NavBar authenticated={isAuthenticated} onLogout={handleLogout} />
               <Container sx={{marginTop:5, marginBottom:10, minHeight:"100%"}}>
                   <Switch>
-                      <Route exact path="/" component={Main} />
-                      <Route exact path="/tasks/:id" component={TaskDetail} />
-                      <Route exact path="/tasks" component={Tasks} />
+                      <Route exact path="/" component={MainPage} />
+                      <Route exact path="/tasks/:id" component={TaskDetailPage} />
+                      <Route exact path="/tasks" component={TasksPage} />
+                      <Route exact path="/search/:query" component={SearchPage} />
 
                       <PrivateRoute path="/tasks/edit/:id" authenticated={isAuthenticated}
                                     component={EditPage}
@@ -65,20 +75,18 @@ const App = () => {
                                     currentUser={currentUser}
                       />
                       <PrivateRoute path="/profile" authenticated={isAuthenticated}
-                                    component={Profile}
+                                    component={ProfilePage}
                                     currentUser={currentUser}
                       />
                       <PrivateRoute path="/create" authenticated={isAuthenticated}
-                                    component={Create}/>
+                                    component={CreatePage}/>
                       <Route path="/login"
                              render={(props) =>
-                                 <Login authenticated={isAuthenticated} {...props} />}/>
+                                 <LoginPage authenticated={isAuthenticated} {...props} />}/>
                       <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
-
-                      <Route component={NotFound}/>
+                      <Route component={NotFoundPage}/>
                   </Switch>
               </Container>
-              <BottomBar />
           </AuthContext.Provider>
         </Provider>
       );

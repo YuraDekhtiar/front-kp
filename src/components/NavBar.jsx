@@ -6,15 +6,13 @@ import IconButton from '@mui/material/IconButton';
 import {MenuItem, Typography} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import {Link} from "react-router-dom";
+import MySearch from "./UI/MySearch";
 
 
 export default function NavBar(props) {
     return (
         <AppBar position="static" color="transparent"  >
             <Toolbar variant="dense">
-                <IconButton edge="start"  aria-label="menu" sx={{ mr: 2 }}>
-                    <MenuIcon />
-                </IconButton>
                 <Link to="/" >
                     <MenuItem>
                         Главная
@@ -37,6 +35,7 @@ export default function NavBar(props) {
                         </>
                         : <></>
                 }
+                <MySearch />
                 <Typography sx={{ flexGrow: 1 }}/>
                 {props.authenticated
                     ?
