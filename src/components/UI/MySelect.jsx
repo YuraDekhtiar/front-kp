@@ -9,7 +9,7 @@ const MySelect = (props) => {
           label="Category"
           variant="standard"
           defaultValue={props.defaultValue}
-          onChange={e => props.setCategory(e.target.value)}
+          onChange={e => props.setTask({...props.task, category: e.target.value})}
       >
 
           <MenuItem disabled value=""><em>Категории</em></MenuItem>

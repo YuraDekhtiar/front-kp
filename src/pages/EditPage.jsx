@@ -28,8 +28,7 @@ const EditPage = (props) => {
                 setCategories(response.data);
             })
         setLoading(false);
-        setLoading(false);
-
+        console.log(task);
     }, []);
 
     if(loading)
