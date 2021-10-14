@@ -1,0 +1,25 @@
+.create-container {
+    padding-top: 30px;
+}
+
+#bodyText {
+    border-radius: 5px;
+    border: 2px solid #949494;
+    margin-top: 20px;
+}
+
+#bodyText:hover {
+    border:2px solid #000000;
+}
+
+#bodyText:focus {
+    outline: none !important;
+    border:2px solid #1976D2;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+.div_save {
+    width: auto;
+    text-align: end;
+    margin-top: 10px;
+}
