@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {getCategories, getTaskById, getTaskByIdForEdit} from "../API/TaskService";
+import {getCategories, getTaskByIdForEdit} from "../API/TaskService";
 import {useParams} from "react-router-dom";
 import NotFoundPage from "./NotFoundPage";
 import LoaderIndicator from "../components/UI/LoaderIndicator";
@@ -113,7 +113,7 @@ const EditPage = (props) => {
 
 
             <div className="div_save">
-                <Button >Save</Button>
+                <Button >Сохранить</Button>
             </div>
         </Container>
     )

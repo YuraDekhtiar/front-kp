@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {Container, InputBase, MenuItem, Paper, Select, TextareaAutosize, TextField, Typography} from "@mui/material";
-import './Create.css'
+import {Container, InputBase, Paper, TextareaAutosize, TextField, Typography} from "@mui/material";
+import './CreatePage.css'
 import Button from "@mui/material/Button";
 import UploadForm from "../components/UI/UploadForm";
 import {uploadFile} from "../API/FileService";
-import {API_BASE_URL} from "../constants";
-import axios from "axios";
-import {getConfig} from "../API/APIUtils";
-import {getCategories} from "../API/TaskService";
+import {addNewTask, getCategories} from "../API/TaskService";
 import LoaderIndicator from "../components/UI/LoaderIndicator";
 import MySelect from "../components/UI/MySelect";
 import {Redirect} from "react-router-dom";
@@ -47,8 +44,8 @@ const CreatePage = (effect, deps) => {
                 task.images = response.data;
 
             })
-
-        await axios.post(API_BASE_URL + "/tasks/", task, getConfig())
+        console.log(task);
+        await addNewTask(task)
             .then(response => {
                 if(response.status == 200){
                     setLoading(false);
@@ -158,7 +155,7 @@ const CreatePage = (effect, deps) => {
                 />
 
                 <div className="div_save">
-                    <Button onClick={save}>Save</Button>
+                    <Button onClick={save}>Сохранить</Button>
                 </div>
             </Paper>
         </Container>

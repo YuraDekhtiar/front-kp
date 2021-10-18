@@ -15,7 +15,7 @@ const Img = styled('img')({
 export default function TaskCard(props) {
     return (
         <Paper sx={{ p: 1, flexGrow: 1}}>
-            <Grid container >
+            <Grid container>
                 <Grid item width="50%" sx={{textAlign:"start"}}>
                     <Rating value={props.task.averageRating} readOnly={true} />
                 </Grid>
@@ -24,15 +24,15 @@ export default function TaskCard(props) {
                         {props.task.created}
                     </Typography>
                 </Grid>
-
-                <Grid item xs={12} >
+                <Grid container justifyContent="center" >
                     {props.task.images.length > 0
-                        ?
-                        <Img alt="Image" src={props.task.images[0].url} />
-                        :
+                    ?
+                        <Img alt="Image" height={400} src={props.task.images[0].url}/>
+                    :
                         <Img alt="Image" src={NO_IMG_URL} />
                     }
                 </Grid>
+
                 <Grid item xs={12} >
                     <Typography variant="h6" component="h2">
                         {props.task.title}
@@ -47,7 +47,7 @@ export default function TaskCard(props) {
                         </Grid>
                         <Grid item xs sx={{textAlign:"end"}}>
                             <Link to={"/tasks/" + props.task.id}>
-                                <Button variant="text" >OPEN</Button>
+                                <Button variant="text" >ОТКРЫТЬ</Button>
                             </Link>
                         </Grid>
                     </Grid>

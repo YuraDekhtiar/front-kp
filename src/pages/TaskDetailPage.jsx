@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {getAnswerResult, getTaskById, getUserAnswered, postSetRating} from "../API/TaskService";
+import {getTaskById, getUserAnswered, setUserAnswer, setRating, sendUserAnswer} from "../API/TaskService";
 import {Redirect, useParams} from "react-router-dom";
 import {
     Alert,
@@ -14,7 +14,6 @@ import LoaderIndicator from "../components/UI/LoaderIndicator";
 import ReactMarkdown from 'react-markdown'
 
 import {AuthContext} from "../context";
-import NotFoundPage from "./NotFoundPage";
 
 const TaskDetailPage = (props) => {
 
@@ -47,7 +46,7 @@ const TaskDetailPage = (props) => {
 
     const isCorrect = async (e) => {
         e.preventDefault();
-        await getAnswerResult(params.id, userAnswer).then(
+        await sendUserAnswer(params.id, userAnswer).then(
             response => {
                 console.log(response.data);
                 if (response.data === true) {
@@ -60,7 +59,7 @@ const TaskDetailPage = (props) => {
     }
 
     const handlerChange = async (e) => {
-        await postSetRating(params.id, e.target.value);
+        await setRating(params.id, e.target.value);
         await getTaskById(params.id)
             .then(response => {
                 setTask(response.data);

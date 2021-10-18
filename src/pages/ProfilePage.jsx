@@ -6,7 +6,7 @@ import TaskIcon from '@mui/icons-material/Task';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import {getCurrentUser} from "../API/UserServices";
 import LoaderIndicator from "../components/UI/LoaderIndicator";
-import {getAllByUserId} from "../API/TaskService";
+import {getAllTasksByUserId} from "../API/TaskService";
 import TasksTable from "../components/UI/TasksTable";
 import {Link} from "react-router-dom";
 
@@ -21,7 +21,7 @@ const ProfilePage = (props) => {
                 setUser(response.data);
             });
 
-        await getAllByUserId(props.currentUser.id)
+        await getAllTasksByUserId(props.currentUser.id)
             .then(response => {
                 setTasks(response.data);
             });

@@ -14,13 +14,13 @@ const SearchPage = () => {
     const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
 
     useEffect( async () => {
-        setTasks([]);
+        setLoading(true);
         searchTask(params.query)
             .then(response => {
                 setTasks(response.data);
             })
         setLoading(false);
-    },[]);
+    },[params]);
 
     if(loading) {
         return <LoaderIndicator />

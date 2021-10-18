@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import {Grid, Typography} from "@mui/material";
 import TaskCard from "../components/UI/TaskCard";
 import LoaderIndicator from "../components/UI/LoaderIndicator";
-import {getAll, getTaskById} from "../API/TaskService";
+import {getAll, getAllTasks, getTaskById} from "../API/TaskService";
 import {AuthContext} from "../context";
 import Button from '@mui/material/Button';
 
@@ -14,11 +14,7 @@ const MainPage = () => {
     const {isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
 
     useEffect(async () => {
-        await getAll()
-            .then(response => {
-                setTasks(response.data);
-            });
-        await getAll()
+        await getAllTasks(5, 0)
             .then(response => {
                 setTasks(response.data);
             });

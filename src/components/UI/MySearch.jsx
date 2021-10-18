@@ -42,6 +42,10 @@ const MySearch = () => {
                 placeholder="поиск..."
                 onClick={e => (e.target.value = "") }
                 onChange={e => (query = e.target.value)}
+                onKeyPress={(e) => {
+                    if (e.key === 'Enter') onClick()
+
+                }}
             />
             <IconButton onClick={onClick}>
                 <SearchIcon />

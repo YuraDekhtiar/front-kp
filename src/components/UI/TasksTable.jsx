@@ -22,7 +22,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import { useAlert } from "react-alert";
-import {deleteTaskById, deleteTaskById1, deleteTaskByListId} from "../../API/TaskService";
+import {deleteTaskByListId} from "../../API/TaskService";
 
 
 function descendingComparator(a, b, orderBy) {
@@ -221,7 +221,7 @@ const EnhancedTableToolbar = (props) => {
                     </Tooltip>
                 )
             ) : (
-                <Tooltip title="Filter list">
+                <Tooltip title="Фильтр">
                     <IconButton>
                         <FilterListIcon />
                     </IconButton>

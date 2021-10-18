@@ -10,22 +10,18 @@ import OAuth2RedirectHandler from "./oauth2/OAuth2RedirectHandler";
 import LoginPage from "./pages/LoginPage";
 import {ACCESS_TOKEN} from "./constants";
 import {Container} from "@mui/material";
-import BottomBar from "./components/UI/BottomBar";
 import {getCurrentUser} from "./API/UserServices";
 import TaskDetailPage from "./pages/TaskDetailPage";
 import {AuthContext} from "./context";
 import TasksPage from "./pages/TasksPage";
 import EditPage from "./pages/EditPage";
-import LoaderIndicator from "./components/UI/LoaderIndicator";
 import AlertTemplate from "react-alert-template-basic";
 import {positions, Provider} from "react-alert";
-import InputBase from "@mui/material/InputBase";
 import SearchPage from "./pages/SearchPage";
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
-    const [loading, setLoading] = useState(true);
 
     const options = {
         timeout: 2000,
@@ -37,9 +33,6 @@ const App = () => {
             .then(response => {
                 setCurrentUser(response.data);
                 setIsAuthenticated(true);
-                setLoading(false);
-            }).catch(() => {
-                setLoading(false);
             })
     },[]);
 
@@ -48,10 +41,6 @@ const App = () => {
         setIsAuthenticated(false);
         setCurrentUser(null);
     }
-    if(loading)
-        return (
-            <LoaderIndicator/>
-        );
 
     return (
         <Provider template={AlertTemplate} {...options}>
